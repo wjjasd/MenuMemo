@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@android:color/background_light"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/background_light"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="@android:color/background_light"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menu Memo"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@android:color/background_light"
+                android:gravity="right">
+
+                <ImageButton
+                    android:id="@+id/settingBtn_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/background_light"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/ic_settings" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TableLayout
+                android:id="@+id/memoTb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:stretchColumns="*">
+
+                <TableRow >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="aasddqwezxcd"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+                <TableRow  >
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="zx"
+                        android:textSize="25sp"
+                        android:textColor="@android:color/black"
+                        android:textAlignment="center"></TextView>
+
+                    <TextView
+
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textSize="25sp"
+                        android:textAlignment="center"></TextView>
+
+                </TableRow>
+
+
+            </TableLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/background_light"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/subtractionBtn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/plusBtn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/clearBtn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear" />
+
+        <Button
+            android:id="@+id/tableBtn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/table" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@android:color/darker_gray"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/buttonsTb_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">MenuMemo</string>
+    <string name="clear">지우기</string>
+    <string name="table">테이블</string>
+    <string name="edit_menu">메뉴 편집</string>
+    <string name="reset_menu">메뉴 초기화</string>
+    <string name="export_menu">메뉴 내보내기</string>
+    <string name="import_menu">메뉴 가져오기</string>
+    <string name="save">저장</string>
+    <string name="delete">삭제</string>
+    <string name="menu">메뉴</string>
+    <string name="category">카테고리</string>
+    <string name="emptyMsg">메뉴와 카테고리를 입력하세요</string>
+    <string name="settings">설정</string>
+    <string name="failed_toast">저장 실패 (메뉴명 중복을 확인하세요)</string>
+    <string name="saved_toast">저장됨</string>
+    <string name="deleted_toast">삭제됨</string>
+    <string name="spinner_default">카테고리를 선택하세요 (모두선택)</string>
+    <string name="selectedMsg"> 가(이) 선택되었습니다</string>
+    <string name="initMes">데이터가 초기화 되었습니다</string>
+    <string name="initDialogTitle">데이터 초기화</string>
+    <string name="initDialogMsg">정말 모든 데이터를 삭제 하시겠습니까?</string>
+    <string name="yes">예</string>
+    <string name="no">아니요</string>
+    <string name="deleteCategoryDialogTitle">카테고리 삭제</string>
+    <string name="deleteCategoryDialogMsg">이 작업은 카테고리에서 모든 메뉴를 삭제합니다</string>
+    <string name="deleteCategoryDialogToast">가(이) 삭제되었습니다</string>
+    <string name="edit_category">카테고리 편집</string>
+    <string name="cancel">취소</string>
+</resources>

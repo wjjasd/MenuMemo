@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">MenuMemo</string>
+    <string name="clear">CLEAR</string>
+    <string name="table">TABLE</string>
+    <string name="edit_menu">edit menu</string>
+    <string name="reset_menu">reset menu</string>
+    <string name="export_menu">export menu</string>
+    <string name="import_menu">import menu</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
+    <string name="menu">menu</string>
+    <string name="category">category</string>
+    <string name="emptyMsg">menu and category cannot be empty</string>
+    <string name="settings">Settings</string>
+    <string name="failed_toast">failed (check duplicate name)</string>
+    <string name="saved_toast">saved</string>
+    <string name="deleted_toast">deleted</string>
+    <string name="spinner_default">select category (all)</string>
+    <string name="selectedMsg">is selected</string>
+    <string name="initMes">Data has been initialized</string>
+    <string name="initDialogTitle">Data Initialization</string>
+    <string name="initDialogMsg">Do you want to delete all data from table?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="deleteCategoryDialogTitle">Delete category</string>
+    <string name="deleteCategoryDialogMsg">This action will delete all menu from category</string>
+    <string name="deleteCategoryDialogToast">has been deleted</string>
+    <string name="edit_category">Edit Category</string>
+    <string name="cancel">cancel</string>
+</resources>

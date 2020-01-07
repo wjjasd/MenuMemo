@@ -3,6 +3,7 @@ package com.wjjasd.google.menumemo;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -11,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static AdapterView spinner;
     public static Adapter adapter_spinner;
     private String mMenu = null;
+    private TableLayout memoTb;
+    private ScrollView scrollView;
 
 
     @Override
@@ -50,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tableBtn = findViewById(R.id.tableBtn_main);
         spinner = findViewById(R.id.spinner_main);
         buttonsTb = findViewById(R.id.buttonsTb_main);
+        memoTb = findViewById(R.id.memoTb);
+        scrollView = findViewById(R.id.scrollView_main);
 
         settingsBtn.setOnClickListener(this);
         plusBtn.setOnClickListener(this);
@@ -114,10 +123,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View v) {
                         mMenu = menuArray[v.getId()];
-                        Toast.makeText(MainActivity.this, mMenu, Toast.LENGTH_SHORT).show();
+                        setMemoTb();
+                        scrollDown();
                     }
                 });
             }
+        }
+    }
+
+    private void scrollDown() {
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    private void setMemoTb() {
+        if(mMenu!=null){
+            TableRow tl = new TableRow(this);
+            TextView menuTv = new TextView(this);
+            menuTv.setText(mMenu);
+            menuTv.setTextSize(25);
+            String stringColor = "#000000";
+            menuTv.setTextColor(Color.parseColor(stringColor));
+            menuTv.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+            tl.addView(menuTv);
+            memoTb.addView(tl);
         }
     }
 
@@ -159,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     @Override
     public void onClick(View v) {
 
@@ -171,10 +203,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == subtractionBtn) {
 
         } else if (v == clearBtn) {
-
+            memoTb.removeAllViews();
         } else if (v == tableBtn) {
 
         }
 
     }
+
 }

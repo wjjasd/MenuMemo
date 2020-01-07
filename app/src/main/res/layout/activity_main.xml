@@ -63,166 +63,21 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/scrollView_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <TableLayout
                 android:id="@+id/memoTb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_marginStart="20dp"
                 android:stretchColumns="*">
 
-                <TableRow >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="aasddqwezxcd"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-                <TableRow  >
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="zx"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/black"
-                        android:textAlignment="center"></TextView>
-
-                    <TextView
-
-                        android:singleLine="true"
-                        android:text="1"
-                        android:textSize="25sp"
-                        android:textAlignment="center"></TextView>
-
-                </TableRow>
-
-
             </TableLayout>
-        </ScrollView>
 
+        </ScrollView>
 
     </LinearLayout>
 
@@ -258,7 +113,6 @@
             android:text="@string/table" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -280,7 +134,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
             </LinearLayout>
 

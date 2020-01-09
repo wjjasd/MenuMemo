@@ -141,16 +141,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setMemoTb() {
-        if(mMenu!=null){
-            TableRow tl = new TableRow(this);
+        if (mMenu != null) {
+            TableRow tr = new TableRow(this);
             TextView menuTv = new TextView(this);
             menuTv.setText(mMenu);
             menuTv.setTextSize(25);
-            String stringColor = "#000000";
-            menuTv.setTextColor(Color.parseColor(stringColor));
-            menuTv.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-            tl.addView(menuTv);
-            memoTb.addView(tl);
+            menuTv.setTextColor(Color.parseColor("#000000"));
+            menuTv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tr.addView(menuTv);
+            memoTb.addView(tr);
         }
     }
 

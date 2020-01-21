@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -19,8 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String mMenu = null;
     private TableLayout memoTb;
     private ScrollView scrollView;
+    private HashMap<String, Boolean> firstCheckerMap = new HashMap<String, Boolean>();
+    private HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
+    private int cursorLength;
 
 
     @Override
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setContent() {
+
         settingsBtn = findViewById(R.id.settingBtn_main);
         plusBtn = findViewById(R.id.plusBtn_main);
         subtractionBtn = findViewById(R.id.subtractionBtn_main);
@@ -83,13 +88,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase db = MemoDBHelper.getInstance(this).getReadableDatabase();
         if (selectedCategory == getResources().getString(R.string.spinner_default)) {
             cursorMenu = db.rawQuery("select name from menu order by category", null);
-            int cursorLength = cursorMenu.getCount();
+            cursorLength = cursorMenu.getCount();
             menuArray = new String[cursorLength];
             if (cursorMenu != null && cursorMenu.getCount() != 0) {
                 cursorMenu.moveToFirst();
                 for (int i = 0; i < cursorMenu.getCount(); i++) {
                     menuArray[i] = cursorMenu.getString(0);
+                    firstCheckerMap.put(menuArray[i], true);
+                    counterMap.put(menuArray[i], 0);
                     cursorMenu.moveToNext();
+
                 }
             }
 
@@ -124,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(View v) {
                         mMenu = menuArray[v.getId()];
                         setMemoTb();
-                        scrollDown();
+                        firstCheckerMap.replace(mMenu, false);
+                        mMenu = null;
                     }
                 });
             }
@@ -142,14 +151,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setMemoTb() {
         if (mMenu != null) {
-            TableRow tr = new TableRow(this);
-            TextView menuTv = new TextView(this);
-            menuTv.setText(mMenu);
-            menuTv.setTextSize(25);
-            menuTv.setTextColor(Color.parseColor("#000000"));
-            menuTv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            tr.addView(menuTv);
-            memoTb.addView(tr);
+            final TableRow tr = new TableRow(this);
+            final TextView menuTv = new TextView(this);
+            final TextView countTv = new TextView(this);
+
+            if (firstCheckerMap.get(mMenu) == true) {
+                menuTv.setText(mMenu);
+                menuTv.setTextSize(25);
+                menuTv.setTextColor(Color.parseColor("#000000"));
+                menuTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+                int count = counterMap.get(mMenu) + 1;
+                String st = String.valueOf(count);
+                countTv.setText(st);
+
+                countTv.setId(convAscii(mMenu));
+                countTv.setTextSize(25);
+                countTv.setTextColor(Color.parseColor("#000000"));
+                countTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+                tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                tr.addView(menuTv);
+                tr.addView(countTv);
+                memoTb.addView(tr);
+                scrollDown();
+
+            } else {
+                int id = convAscii(mMenu);
+                TextView tv = findViewById(id);
+                int count = Integer.parseInt(tv.getText().toString());
+                count += 1;
+                tv.setText(Integer.toString(count));
+            }
+
+            tr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ColorDrawable rowColor = (ColorDrawable) tr.getBackground();
+                    int colorId = rowColor.getColor();
+                    if (colorId == 0xffffffff) {
+                        tr.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                         
+                    } else {
+                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                    }
+                }
+            });
+
         }
     }
 
@@ -202,11 +251,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == subtractionBtn) {
 
         } else if (v == clearBtn) {
+
             memoTb.removeAllViews();
+
+            SQLiteDatabase db = MemoDBHelper.getInstance(this).getReadableDatabase();
+            cursorMenu = db.rawQuery("select name from menu order by category", null);
+            cursorLength = cursorMenu.getCount();
+            menuArray = new String[cursorLength];
+            if (cursorMenu != null && cursorMenu.getCount() != 0) {
+                cursorMenu.moveToFirst();
+                for (int i = 0; i < cursorMenu.getCount(); i++) {
+                    menuArray[i] = cursorMenu.getString(0);
+                    firstCheckerMap.replace(menuArray[i], true);
+                    counterMap.replace(menuArray[i], 0);
+                    cursorMenu.moveToNext();
+                }
+            }
+
         } else if (v == tableBtn) {
 
         }
+    }
 
+    private int convAscii(String st) {
+        int code = 0;
+        char[] chars = st.toCharArray();
+        for (int i = 0; i < st.length(); i++) {
+            char c = chars[i];
+            code += (int) c + 1000;
+        }
+        return code;
     }
 
 }
+
+

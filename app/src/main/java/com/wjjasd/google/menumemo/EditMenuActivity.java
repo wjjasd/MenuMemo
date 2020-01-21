@@ -97,7 +97,6 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
 
                 setList();
 
-
             }
 
             @Override
@@ -147,7 +146,6 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
                 HashMap clickItemMap = (HashMap) clickItemObj;
                 String menu = (String) clickItemMap.get("name");
                 String category = (String) clickItemMap.get("category");
-
 
                 menuEdt.setText(menu);
                 categoryEdt.setText(category);

@@ -102,7 +102,7 @@
                         android:layout_height="50dp"
                         android:hint="@string/menu"
                         android:inputType="text"
-                        android:maxLength="25"></EditText>
+                        android:maxLength="20"></EditText>
 
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                         android:layout_height="50dp"
                         android:hint="@string/category"
                         android:inputType="text"
-                        android:maxLength="25"></EditText>
+                        android:maxLength="20"></EditText>
 
                 </LinearLayout>
 

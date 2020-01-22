@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MenuMemo</string>
     <string name="clear">지우기</string>
+    <string name="all_clear">전체삭제</string>
     <string name="table">테이블</string>
     <string name="edit_menu">메뉴 편집</string>
     <string name="reset_menu">메뉴 초기화</string>

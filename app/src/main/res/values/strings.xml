@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MenuMemo</string>
     <string name="clear">CLEAR</string>
+    <string name="all_clear">ALL CLEAR</string>
     <string name="table">TABLE</string>
     <string name="edit_menu">edit menu</string>
     <string name="reset_menu">reset menu</string>

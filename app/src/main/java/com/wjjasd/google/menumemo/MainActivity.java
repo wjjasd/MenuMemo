@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HashMap<String, Boolean> firstCheckerMap = new HashMap<String, Boolean>();
     private HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
     private int cursorLength;
+    private int mCount;
+    private TableRow newTr[] = new TableRow[200];
+    private int trIndex = -1;
+    private int mtrCount;
 
 
     @Override
@@ -151,53 +156,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setMemoTb() {
         if (mMenu != null) {
-            final TableRow tr = new TableRow(this);
+
             final TextView menuTv = new TextView(this);
             final TextView countTv = new TextView(this);
 
             if (firstCheckerMap.get(mMenu) == true) {
+
+                trIndex += 1;
+                newTr[trIndex] = new TableRow(MainActivity.this);
+                newTr[trIndex].setId(trIndex + 10000);
+
                 menuTv.setText(mMenu);
                 menuTv.setTextSize(25);
                 menuTv.setTextColor(Color.parseColor("#000000"));
                 menuTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                int count = counterMap.get(mMenu) + 1;
-                String st = String.valueOf(count);
+                mCount = counterMap.get(mMenu) + 1;
+                String st = String.valueOf(mCount);
                 countTv.setText(st);
-
                 countTv.setId(convAscii(mMenu));
                 countTv.setTextSize(25);
                 countTv.setTextColor(Color.parseColor("#000000"));
                 countTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-                tr.addView(menuTv);
-                tr.addView(countTv);
-                memoTb.addView(tr);
+                newTr[trIndex].setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                newTr[trIndex].addView(menuTv);
+                newTr[trIndex].addView(countTv);
+                memoTb.addView(newTr[trIndex]);
                 scrollDown();
+
+
+                newTr[trIndex].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        mtrCount = memoTb.getChildCount();
+                        int position = v.getId();
+                        position = position - 10000;
+
+                        ColorDrawable rowColor = (ColorDrawable) v.getBackground();
+                        int colorId = rowColor.getColor();
+                        if (colorId == 0xffffffff) {
+                            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                            if (mtrCount > 1) {
+                                for (int i = 0; i < position; i++) {
+                                    TableRow tr = findViewById(i + 10000);
+                                    tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                }
+                                for (int i = position + 1; i < mtrCount; i++) {
+                                    TableRow tr = findViewById(i + 10000);
+                                    tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                }
+                            }
+
+                        } else {
+                            v.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                        }
+                    }
+                });
 
             } else {
                 int id = convAscii(mMenu);
                 TextView tv = findViewById(id);
-                int count = Integer.parseInt(tv.getText().toString());
-                count += 1;
-                tv.setText(Integer.toString(count));
+                mCount = Integer.parseInt(tv.getText().toString());
+                mCount += 1;
+                tv.setText(Integer.toString(mCount));
             }
 
-            tr.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    ColorDrawable rowColor = (ColorDrawable) tr.getBackground();
-                    int colorId = rowColor.getColor();
-                    if (colorId == 0xffffffff) {
-                        tr.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                         
-                    } else {
-                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-                    }
-                }
-            });
 
         }
     }
@@ -266,7 +292,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     counterMap.replace(menuArray[i], 0);
                     cursorMenu.moveToNext();
                 }
+                trIndex = -1;
+
+
             }
+
 
         } else if (v == tableBtn) {
 

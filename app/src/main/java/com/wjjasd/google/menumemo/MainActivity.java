@@ -97,10 +97,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             menuArray = new String[cursorLength];
             if (cursorMenu != null && cursorMenu.getCount() != 0) {
                 cursorMenu.moveToFirst();
-                for (int i = 0; i < cursorMenu.getCount(); i++) {
+                for (int i = 0; i < cursorLength; i++) {
                     menuArray[i] = cursorMenu.getString(0);
-                    firstCheckerMap.put(menuArray[i], true);
-                    counterMap.put(menuArray[i], 0);
+                    if(memoTb.getChildCount()==0){
+                        firstCheckerMap.put(menuArray[i], true);
+                        counterMap.put(menuArray[i], 0);
+                    }
                     cursorMenu.moveToNext();
 
                 }

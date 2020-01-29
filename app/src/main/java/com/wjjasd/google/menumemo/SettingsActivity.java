@@ -54,15 +54,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         backBtn = findViewById(R.id.backBtn_settings);
         homeBtn = findViewById(R.id.homeBtn_settings);
         editMenuBtn = findViewById(R.id.editMenuBtn_settings);
-        exportMenuBtn = findViewById(R.id.exportMenu_settings);
-        importMenuBtn = findViewById(R.id.importMenu_settings);
         resetMenuBtn = findViewById(R.id.resetMenu_settings);
 
         backBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
         editMenuBtn.setOnClickListener(this);
-        exportMenuBtn.setOnClickListener(this);
-        importMenuBtn.setOnClickListener(this);
         resetMenuBtn.setOnClickListener(this);
     }
 

@@ -17,10 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,6 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TableRow newTr[] = new TableRow[200];
     private int trIndex = -1;
     private int mtrCount;
+    private int tableRowPosition;
+    private int highlightCountId = 0;
+    private TextView highlightTv;
+    private int highlightTrId;
+    private String highlightMenuBuffer;
 
 
     @Override
@@ -64,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusBtn = findViewById(R.id.plusBtn_main);
         subtractionBtn = findViewById(R.id.subtractionBtn_main);
         clearBtn = findViewById(R.id.clearBtn_main);
-        tableBtn = findViewById(R.id.tableBtn_main);
         spinner = findViewById(R.id.spinner_main);
         buttonsTb = findViewById(R.id.buttonsTb_main);
         memoTb = findViewById(R.id.memoTb);
@@ -74,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusBtn.setOnClickListener(this);
         subtractionBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
-        tableBtn.setOnClickListener(this);
 
         setSpinner();
         setButtonsTb();
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 cursorMenu.moveToFirst();
                 for (int i = 0; i < cursorLength; i++) {
                     menuArray[i] = cursorMenu.getString(0);
-                    if(memoTb.getChildCount()==0){
+                    if (memoTb.getChildCount() == 0) {
                         firstCheckerMap.put(menuArray[i], true);
                         counterMap.put(menuArray[i], 0);
                     }
@@ -137,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menuBtn[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mMenu = menuArray[v.getId()];
+                        TextView tv = findViewById(v.getId());
+                        mMenu = tv.getText().toString();
                         setMemoTb();
                         firstCheckerMap.replace(mMenu, false);
                         mMenu = null;
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mCount = counterMap.get(mMenu) + 1;
                 String st = String.valueOf(mCount);
                 countTv.setText(st);
-                countTv.setId(convAscii(mMenu));
+                countTv.setId(getAscii(mMenu));
                 countTv.setTextSize(25);
                 countTv.setTextColor(Color.parseColor("#000000"));
                 countTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
@@ -193,33 +194,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(View v) {
 
                         mtrCount = memoTb.getChildCount();
-                        int position = v.getId();
-                        position = position - 10000;
+                        tableRowPosition = v.getId();
+                        tableRowPosition = tableRowPosition - 10000;
 
                         ColorDrawable rowColor = (ColorDrawable) v.getBackground();
                         int colorId = rowColor.getColor();
                         if (colorId == 0xffffffff) {
                             v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            highlightCountId = newTr[tableRowPosition].getChildAt(1).getId();
+                            highlightTrId = v.getId();
+                            TextView highlightMenu = (TextView) newTr[tableRowPosition].getChildAt(0);
+                            highlightMenuBuffer = highlightMenu.getText().toString();
 
                             if (mtrCount > 1) {
-                                for (int i = 0; i < position; i++) {
+                                for (int i = 0; i < tableRowPosition; i++) {
                                     TableRow tr = findViewById(i + 10000);
-                                    tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                    if (tr != null) {
+                                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                    }
                                 }
-                                for (int i = position + 1; i < mtrCount; i++) {
+                                for (int i = tableRowPosition + 1; i < mtrCount; i++) {
                                     TableRow tr = findViewById(i + 10000);
-                                    tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                    if (tr != null) {
+                                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                    }
                                 }
                             }
 
                         } else {
                             v.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                            highlightCountId = 0;
                         }
                     }
                 });
 
             } else {
-                int id = convAscii(mMenu);
+                int id = getAscii(mMenu);
                 TextView tv = findViewById(id);
                 mCount = Integer.parseInt(tv.getText().toString());
                 mCount += 1;
@@ -275,8 +285,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         } else if (v == plusBtn) {
-
+            if (highlightCountId != 0) {
+                highlightTv = findViewById(highlightCountId);
+                int count = Integer.valueOf(highlightTv.getText().toString());
+                count += 1;
+                highlightTv.setText(String.valueOf(count));
+            }
         } else if (v == subtractionBtn) {
+            if (highlightCountId != 0) {
+                highlightTv = findViewById(highlightCountId);
+                int count = Integer.valueOf(highlightTv.getText().toString());
+                count -= 1;
+                if (count < 1) {
+                    TableRow tr = findViewById(highlightTrId);
+                    mtrCount = memoTb.getChildCount();
+                    for (int i = tableRowPosition + 1; i < mtrCount; i++) {
+                        int newId = newTr[i].getId();
+                        newTr[i].setId(newId - 1);
+                    }
+                    for (int j = tableRowPosition; j < mtrCount; j++) {
+                        newTr[j] = newTr[j + 1];
+                    }
+                    memoTb.removeView(tr);
+                    trIndex-=1;
+                    highlightCountId = 0;
+                    firstCheckerMap.replace(highlightMenuBuffer, true);
+
+
+                } else {
+                    highlightTv.setText(String.valueOf(count));
+                }
+            }
+
 
         } else if (v == clearBtn) {
 
@@ -295,8 +335,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     cursorMenu.moveToNext();
                 }
                 trIndex = -1;
-
-
+                highlightCountId = 0;
             }
 
 
@@ -305,7 +344,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private int convAscii(String st) {
+
+    private int getAscii(String st) {
         int code = 0;
         char[] chars = st.toCharArray();
         for (int i = 0; i < st.length(); i++) {
@@ -315,6 +355,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return code;
     }
 
+
 }
-
-

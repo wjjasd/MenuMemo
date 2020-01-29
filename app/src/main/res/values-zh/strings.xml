@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MenuMemo</string>
+    <string name="all_clear">清除</string>
+    <string name="cancel">取消</string>
+    <string name="category">分类</string>
+    <string name="clear">清除</string>
+    <string name="delete">删除</string>
+    <string name="deleteCategoryDialogMsg">此操着会删除所有的菜单</string>
+    <string name="deleteCategoryDialogTitle">删除分类</string>
+    <string name="deleteCategoryDialogToast">已被删掉</string>
+    <string name="deleted_toast">删除</string>
+    <string name="edit_category">编辑分类</string>
+    <string name="edit_menu">编辑菜单</string>
+    <string name="emptyMsg">菜名和分类不能为空</string>
+    <string name="export_menu">输出菜单</string>
+    <string name="import_menu">输入菜单</string>
+    <string name="failed_toast">失败（确认菜名是否重复）</string>
+    <string name="initDialogMsg">您确认删除所有数据吗？</string>
+    <string name="initDialogTitle">数据初始化</string>
+    <string name="initMes">数据已被初始化</string>
+    <string name="menu">菜名</string>
+    <string name="no">否</string>
+    <string name="yes">是</string>
+    <string name="table">餐桌</string>
+    <string name="spinner_default">请选分类（选全部）</string>
+    <string name="settings">设置</string>
+    <string name="selectedMsg">已被选</string>
+    <string name="save">保存</string>
+    <string name="saved_toast">已被保存</string>
+    <string name="reset_menu">菜单初始化</string>
+</resources>

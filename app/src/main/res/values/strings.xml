@@ -28,4 +28,7 @@
     <string name="deleteCategoryDialogToast">has been deleted</string>
     <string name="edit_category">Edit Category</string>
     <string name="cancel">cancel</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-1136089143214600~2160892547</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1136089143214600/9847810875</string>
+    <string name="banner_ad_unit_id_for_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

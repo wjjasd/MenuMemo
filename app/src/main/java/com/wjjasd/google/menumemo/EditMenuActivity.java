@@ -21,6 +21,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +42,7 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
     SimpleAdapter adapter;
     Adapter adapter_spinner;
     private String selectedCategory;
+    private AdView mAdView;
 
 
     @Override
@@ -45,6 +50,12 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_menu);
         setContent();
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        mAdView = findViewById(R.id.adView_editMenu);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     private void setContent() {
@@ -58,7 +69,6 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
         spinner = findViewById(R.id.spinner_editMenu);
         listView = findViewById(R.id.list_editMenu);
         refreshBtn = findViewById(R.id.refresh_editMenu);
-
 
         backBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
@@ -88,7 +98,6 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
             adapter_spinner = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, list);
             spinner.setAdapter((SpinnerAdapter) adapter_spinner);
         }
-
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -160,8 +169,8 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
                 HashMap clickItemMap = (HashMap) clickItemObj;
                 String category = (String) clickItemMap.get("category");
 
-                Intent intent = new Intent(EditMenuActivity.this,EditCategoryActivity.class);
-                intent.putExtra("category",category);
+                Intent intent = new Intent(EditMenuActivity.this, EditCategoryActivity.class);
+                intent.putExtra("category", category);
                 startActivityForResult(intent, REQUEST_CODE);
 
                 return true;
@@ -172,7 +181,7 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_CODE&&resultCode==RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             setList();
         }
     }

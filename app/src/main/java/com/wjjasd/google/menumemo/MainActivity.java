@@ -18,11 +18,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusBtn.setOnClickListener(this);
         subtractionBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
+
 
         setSpinner();
         setButtonsTb();
@@ -349,8 +348,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 highlightCountId = 0;
             }
 
-
         } else if (v == tableBtn) {
+
+
 
         }
     }

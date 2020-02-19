@@ -57,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             MainActivity.spinner.setAdapter(MainActivity.adapter_spinner);
         }
         super.onBackPressed();
+        finish();
 
     }
 

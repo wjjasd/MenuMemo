@@ -56,7 +56,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             MainActivity.adapter_spinner = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, list);
             MainActivity.spinner.setAdapter(MainActivity.adapter_spinner);
         }
-        super.onBackPressed();
+        Intent intent = new Intent(SettingsActivity.this,MainActivity.class);
+        startActivity(intent);
         finish();
 
     }
@@ -84,6 +85,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         } else if (v == editMenuBtn) {
             Intent intent = new Intent(this, EditMenuActivity.class);
             startActivity(intent);
+            finish();
         } else if (v == resetMenuBtn) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getResources().getString(R.string.initDialogTitle));

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".MainActivity">
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="@android:color/background_light"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
 
@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:gravity="center">
 
             </LinearLayout>
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:gravity="center">
 
                 <TextView
@@ -50,15 +50,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:gravity="right">
 
                 <ImageButton
                     android:id="@+id/settingBtn_main"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/background_light"
-                    android:paddingRight="10dp"
+                    android:background="@color/colorPrimary"
                     android:src="@drawable/ic_settings" />
             </LinearLayout>
 
@@ -68,15 +67,15 @@
             android:id="@+id/scrollView_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/background_light">
+            android:background="@color/colorPrimary">
 
             <TableLayout
                 android:id="@+id/memoTb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:orientation="vertical"
                 android:stretchColumns="*">
 
             </TableLayout>
@@ -89,29 +88,36 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/background_light"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
 
         <Button
             android:id="@+id/subtractionBtn_main"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" />
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_background"
+            android:text="-"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/plusBtn_main"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
-
+            android:layout_height="40dp"
+            android:background="@drawable/button_background"
+            android:text="+"
+            android:textColor="@color/white" />
 
 
         <Button
             android:id="@+id/clearBtn_main"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/all_clear" />
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_background"
+            android:text="@string/all_clear"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
@@ -120,7 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -137,6 +143,7 @@
                 android:id="@+id/buttonsTb_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:orientation="vertical">
 
             </LinearLayout>
@@ -144,19 +151,17 @@
         </ScrollView>
 
 
-
     </LinearLayout>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView_main"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
+        android:background="@color/colorPrimary"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".MainActivity">
@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@android:color/background_light"
+        android:background="@color/colorPrimary"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:layout_weight="0.1"
@@ -20,6 +20,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
+            android:background="@color/colorPrimary"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="left">
@@ -28,7 +29,7 @@
                 android:id="@+id/backBtn_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_arrow_back" />
 
@@ -38,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:background="@android:color/background_light"
+            android:background="@color/colorPrimary"
             android:gravity="center">
 
             <TextView
@@ -53,14 +54,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:background="@android:color/background_light"
+            android:background="@color/colorPrimary"
             android:gravity="right">
 
             <ImageButton
                 android:id="@+id/homeBtn_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:paddingRight="10dp"
                 android:src="@drawable/ic_home" />
         </LinearLayout>

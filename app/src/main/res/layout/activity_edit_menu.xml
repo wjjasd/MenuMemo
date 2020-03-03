@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@android:color/background_light"
+        android:background="@color/colorPrimary"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -25,7 +25,7 @@
                 android:id="@+id/backBtn_editMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_arrow_back" />
 
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:background="@android:color/background_light"
+            android:background="@color/colorPrimary"
             android:gravity="center">
 
             <TextView
@@ -50,14 +50,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:background="@android:color/background_light"
+            android:background="@color/colorPrimary"
             android:gravity="right">
 
             <ImageButton
                 android:id="@+id/homeBtn_editMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@android:color/background_light"
+                android:background="@color/colorPrimary"
                 android:paddingRight="10dp"
                 android:src="@drawable/ic_home" />
         </LinearLayout>
@@ -78,7 +78,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30"
+            android:layout_weight="35"
             android:orientation="horizontal"
             android:weightSum="100">
 
@@ -99,7 +99,7 @@
                     <EditText
                         android:id="@+id/edtMenu_editMenu"
                         android:layout_width="200dp"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:hint="@string/menu"
                         android:inputType="text"
                         android:maxLength="20"></EditText>
@@ -121,7 +121,7 @@
                     <EditText
                         android:id="@+id/edtCategory_editMenu"
                         android:layout_width="200dp"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:hint="@string/category"
                         android:inputType="text"
                         android:maxLength="20"></EditText>
@@ -138,7 +138,6 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
                 android:layout_weight="30"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -147,22 +146,30 @@
                     android:id="@+id/saveBtn_editMenu"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
                     android:text="@string/save"
-                    android:textSize="20sp"></Button>
+                    android:layout_margin="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"></Button>
 
                 <Button
                     android:id="@+id/deleteBtn_editMenu"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/white"
                     android:text="@string/delete"
-                    android:textSize="20sp"></Button>
+                    android:textSize="16sp"></Button>
 
                 <Button
                     android:id="@+id/clearBtn_editMenu"
                     android:layout_width="100dp"
+                    android:layout_margin="5dp"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/white"
                     android:text="@string/clear"
-                    android:textSize="20sp"></Button>
+                    android:textSize="16sp"></Button>
 
             </LinearLayout>
 
@@ -176,7 +183,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="70"
+            android:layout_weight="65"
             android:orientation="vertical">
 
             <LinearLayout
@@ -212,7 +219,7 @@
                         android:id="@+id/refresh_editMenu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@android:color/background_light"
+                      android:background="@drawable/button_background"
                         android:src="@drawable/ic_refresh_black_24dp" />
 
                 </LinearLayout>
@@ -230,7 +237,6 @@
                 android:id="@+id/list_editMenu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
 
         </LinearLayout>
 

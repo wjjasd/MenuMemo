@@ -1,5 +1,6 @@
 package com.wjjasd.google.menumemo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,10 +18,14 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -66,6 +71,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdView = findViewById(R.id.adView_main);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.message_quit);
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
 
     }
 
@@ -143,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menuBtn[i].setId(i);
                 menuBtn[i].setText(menuArray[i]);
                 menuBtn[i].setAllCaps(false);
+
                 buttonsTb.addView(menuBtn[i]);
                 menuBtn[i].setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -181,18 +212,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 menuTv.setText(mMenu);
                 menuTv.setTextSize(25);
-                menuTv.setTextColor(Color.parseColor("#000000"));
+                menuTv.setTextColor(Color.parseColor("#802D2D"));
                 menuTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
                 mCount = counterMap.get(mMenu) + 1;
                 String st = String.valueOf(mCount);
                 countTv.setText(st);
-                countTv.setId(getAscii(mMenu));
+                int id = getCountId(mMenu);
+                countTv.setId(id);
                 countTv.setTextSize(25);
-                countTv.setTextColor(Color.parseColor("#000000"));
+                countTv.setTextColor(Color.parseColor("#802D2D"));
                 countTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                newTr[trIndex].setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                newTr[trIndex].setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 newTr[trIndex].addView(menuTv);
                 newTr[trIndex].addView(countTv);
                 memoTb.addView(newTr[trIndex]);
@@ -209,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         ColorDrawable rowColor = (ColorDrawable) v.getBackground();
                         int colorId = rowColor.getColor();
-                        if (colorId == 0xffffffff) {
-                            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        if (colorId == getResources().getColor(R.color.colorPrimary)) {
+                            v.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                             highlightCountId = newTr[tableRowPosition].getChildAt(1).getId();
                             highlightTrId = v.getId();
                             TextView highlightMenu = (TextView) newTr[tableRowPosition].getChildAt(0);
@@ -220,26 +252,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 for (int i = 0; i < tableRowPosition; i++) {
                                     TableRow tr = findViewById(i + 10000);
                                     if (tr != null) {
-                                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                        tr.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                     }
                                 }
                                 for (int i = tableRowPosition + 1; i < mtrCount; i++) {
                                     TableRow tr = findViewById(i + 10000);
                                     if (tr != null) {
-                                        tr.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                                        tr.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                     }
                                 }
                             }
 
                         } else {
-                            v.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+                            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                             highlightCountId = 0;
                         }
                     }
                 });
 
             } else {
-                int id = getAscii(mMenu);
+                int id = getCountId(mMenu);
                 TextView tv = findViewById(id);
                 mCount = Integer.parseInt(tv.getText().toString());
                 mCount += 1;
@@ -294,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == settingsBtn) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
+            finish();
         } else if (v == plusBtn) {
             if (highlightCountId != 0) {
                 highlightTv = findViewById(highlightCountId);
@@ -317,11 +350,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         newTr[j] = newTr[j + 1];
                     }
                     memoTb.removeView(tr);
-                    trIndex-=1;
+                    trIndex -= 1;
                     highlightCountId = 0;
                     firstCheckerMap.replace(highlightMenuBuffer, true);
-
-
                 } else {
                     highlightTv.setText(String.valueOf(count));
                 }
@@ -351,18 +382,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == tableBtn) {
 
 
-
         }
     }
 
 
-    private int getAscii(String st) {
-        int code = 0;
-        char[] chars = st.toCharArray();
-        for (int i = 0; i < st.length(); i++) {
-            char c = chars[i];
-            code += (int) c + 1000;
+    private int getCountId(String st) {
+        /** code 중복발생함!
+         int code = 0;
+         char[] chars = st.toCharArray();
+         int length = st.length();
+         for (int i = 0; i < length; i++) {
+         char c = chars[i];
+         code += (int) c + 1000;
+         }
+         **/
+        int multi = 1;
+        int code = 1000;
+           for (int i = 0; i < st.length(); i++) {
+                int buffer = (int) st.charAt(i) * multi;
+                code = code + buffer;
+                multi *= 2;
         }
+
         return code;
     }
 

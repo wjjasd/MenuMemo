@@ -7,17 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +31,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int highlightTrId;
     private String highlightMenuBuffer;
     private AdView mAdView;
-
+    private String[] intentMenu;
+    private int[] intentCount;
+    private boolean dataCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdView = findViewById(R.id.adView_main);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
     }
 
@@ -96,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-
     }
 
     private void setContent() {
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusBtn = findViewById(R.id.plusBtn_main);
         subtractionBtn = findViewById(R.id.subtractionBtn_main);
         clearBtn = findViewById(R.id.clearBtn_main);
+        tableBtn = findViewById(R.id.tableBtn_main);
         spinner = findViewById(R.id.spinner_main);
         buttonsTb = findViewById(R.id.buttonsTb_main);
         memoTb = findViewById(R.id.memoTb);
@@ -114,12 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusBtn.setOnClickListener(this);
         subtractionBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
-
+        tableBtn.setOnClickListener(this);
 
         setSpinner();
         setButtonsTb();
     }
-
 
     private void setButtonsTb() {
 
@@ -144,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         counterMap.put(menuArray[i], 0);
                     }
                     cursorMenu.moveToNext();
-
                 }
             }
 
@@ -178,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menuBtn[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        TextView tv = findViewById(v.getId());
+
+                        TextView tv = (TextView) v;
                         mMenu = tv.getText().toString();
                         setMemoTb();
                         firstCheckerMap.replace(mMenu, false);
@@ -216,6 +222,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menuTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
                 mCount = counterMap.get(mMenu) + 1;
+
+                counterMap.replace(mMenu, mCount);
+
                 String st = String.valueOf(mCount);
                 countTv.setText(st);
                 int id = getCountId(mMenu);
@@ -229,7 +238,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 newTr[trIndex].addView(countTv);
                 memoTb.addView(newTr[trIndex]);
                 scrollDown();
-
 
                 newTr[trIndex].setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -273,8 +281,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 int id = getCountId(mMenu);
                 TextView tv = findViewById(id);
-                mCount = Integer.parseInt(tv.getText().toString());
-                mCount += 1;
+
+                mCount = counterMap.get(mMenu) + 1;
+                counterMap.replace(mMenu, mCount);
+
+                //mCount = Integer.parseInt(tv.getText().toString());
+                //mCount += 1;
                 tv.setText(Integer.toString(mCount));
             }
 
@@ -290,7 +302,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     public void setSpinner() {
         SQLiteDatabase db = MemoDBHelper.getInstance(MainActivity.this).getReadableDatabase();
@@ -317,7 +328,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
     }
 
     @Override
@@ -353,6 +363,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     trIndex -= 1;
                     highlightCountId = 0;
                     firstCheckerMap.replace(highlightMenuBuffer, true);
+                    counterMap.replace(highlightMenuBuffer, 0);
+
                 } else {
                     highlightTv.setText(String.valueOf(count));
                 }
@@ -381,7 +393,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (v == tableBtn) {
 
+            if (memoTb.getChildCount() <= 0) {
 
+                Intent intent = new Intent(MainActivity.this, TableActivity.class);
+                dataCheck = false;
+                intent.putExtra("dataCheck",dataCheck);
+                startActivity(intent);
+                finish();
+
+            } else {
+                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle(getResources().getString(R.string.tableDialogTitle));
+                final EditText et = new EditText(this);
+                alertDialogBuilder.setView(et);
+                alertDialogBuilder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String st = et.getText().toString();
+                        if (st == null || st.equals(null) || st == "" || st.getBytes().length <= 0) {
+                            Toast.makeText(MainActivity.this,
+                                    getResources().getString(R.string.tableDialogTitle), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, TableActivity.class);
+                            intent.putExtra("tableNo", st);
+                            setTableData();
+                            intent.putExtra("menu", intentMenu);
+                            intent.putExtra("count", intentCount);
+                            dataCheck = true;
+                            intent.putExtra("dataCheck",dataCheck);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
+                alertDialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogBuilder.show();
+            }
+        }
+    }
+
+    private void setTableData() {
+        SQLiteDatabase db = MemoDBHelper.getInstance(this).getReadableDatabase();
+        cursorMenu = db.rawQuery("select name from menu order by category", null);
+        cursorLength = cursorMenu.getCount();
+        menuArray = new String[cursorLength];
+        if (cursorMenu != null && cursorMenu.getCount() != 0) {
+            cursorMenu.moveToFirst();
+            for (int i = 0; i < cursorLength; i++) {
+                menuArray[i] = cursorMenu.getString(0);
+                cursorMenu.moveToNext();
+            }
+        }
+
+        int intentMenuLength = 0;
+        for (int i = 0; i < menuArray.length; i++) {
+            if (firstCheckerMap.get(menuArray[i]) == false) {
+                intentMenuLength += 1;
+            }
+        }
+        intentMenu = new String[intentMenuLength];
+        intentCount = new int[intentMenuLength];
+
+        int j = 0;
+        for (int i = 0; i < menuArray.length; i++) {
+            if (firstCheckerMap.get(menuArray[i]) == false) {
+                intentMenu[j] = menuArray[i];
+                intentCount[j] = counterMap.get(menuArray[i]);
+                j += 1;
+            }
         }
     }
 
@@ -398,10 +482,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          **/
         int multi = 1;
         int code = 1000;
-           for (int i = 0; i < st.length(); i++) {
-                int buffer = (int) st.charAt(i) * multi;
-                code = code + buffer;
-                multi *= 2;
+        for (int i = 0; i < st.length(); i++) {
+            int buffer = (int) st.charAt(i) * multi;
+            code = code + buffer;
+            multi *= 2;
         }
 
         return code;

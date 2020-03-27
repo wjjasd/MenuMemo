@@ -30,4 +30,6 @@
     <string name="saved_toast">已保存</string>
     <string name="reset_menu">菜单初始化</string>
     <string name="message_quit">确定要退出吗？</string>
+    <string name="tableDialogTitle" >请输入桌号</string>
+    <string name="confirm">确定</string>
 </resources>

@@ -32,6 +32,7 @@
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1136089143214600/9847810875</string>
     <string name="banner_ad_unit_id_for_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="message_quit">Do you want to quit?</string>
-    <string name="tableDialogTitle" >Please enter a table number</string>
+    <string name="tableDialogTitle">Please enter a table number</string>
     <string name="confirm">confirm</string>
+    <string name="tableNo_duplicate">This table number already exists</string>
 </resources>

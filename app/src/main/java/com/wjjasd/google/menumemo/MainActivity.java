@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,8 @@ import com.google.android.gms.ads.MobileAds;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String[] intentMenu;
     private int[] intentCount;
     private boolean dataCheck;
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdView = findViewById(R.id.adView_main);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mRealm = Realm.getDefaultInstance();
 
     }
 
@@ -397,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent intent = new Intent(MainActivity.this, TableActivity.class);
                 dataCheck = false;
-                intent.putExtra("dataCheck",dataCheck);
+                intent.putExtra("dataCheck", dataCheck);
                 startActivity(intent);
                 finish();
 
@@ -405,6 +410,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle(getResources().getString(R.string.tableDialogTitle));
                 final EditText et = new EditText(this);
+                et.setInputType(InputType.TYPE_CLASS_TEXT);
+                et.setMaxLines(1);
+
+                InputFilter[] FilterArray = new InputFilter[1];
+                FilterArray[0] = new InputFilter.LengthFilter(20);
+                et.setFilters(FilterArray);
+
                 alertDialogBuilder.setView(et);
                 alertDialogBuilder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
@@ -413,6 +425,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (st == null || st.equals(null) || st == "" || st.getBytes().length <= 0) {
                             Toast.makeText(MainActivity.this,
                                     getResources().getString(R.string.tableDialogTitle), Toast.LENGTH_SHORT).show();
+                        } else if (mRealm.where(MemoVo.class).equalTo("tableNo", st).count() > 0) {
+                            Toast.makeText(MainActivity.this,
+                                    getResources().getString(R.string.tableNo_duplicate), Toast.LENGTH_SHORT).show();
                         } else {
                             Intent intent = new Intent(MainActivity.this, TableActivity.class);
                             intent.putExtra("tableNo", st);
@@ -420,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             intent.putExtra("menu", intentMenu);
                             intent.putExtra("count", intentCount);
                             dataCheck = true;
-                            intent.putExtra("dataCheck",dataCheck);
+                            intent.putExtra("dataCheck", dataCheck);
                             startActivity(intent);
                             finish();
                         }

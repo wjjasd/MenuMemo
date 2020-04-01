@@ -94,8 +94,8 @@
 
         <Button
             android:id="@+id/subtractionBtn_main"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_background"
             android:text="-"
@@ -103,8 +103,8 @@
 
         <Button
             android:id="@+id/plusBtn_main"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_background"
             android:text="+"
@@ -113,8 +113,8 @@
 
         <Button
             android:id="@+id/clearBtn_main"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_background"
             android:text="@string/all_clear"
@@ -122,8 +122,8 @@
 
         <Button
             android:id="@+id/tableBtn_main"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_background"
             android:text="@string/table"

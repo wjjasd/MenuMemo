@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int mtrCount;
     private int tableRowPosition;
     private int highlightCountId = 0;
-    private TextView highlightTv;
-    private int highlightTrId;
-    private String highlightMenuBuffer;
+    private TextView highlightTv = null;
+    private int highlightTrId = 0;
+    private String highlightMenuBuffer = null;
     private AdView mAdView;
     private String[] intentMenu;
     private int[] intentCount;
@@ -243,6 +243,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 newTr[trIndex].addView(countTv);
                 memoTb.addView(newTr[trIndex]);
                 scrollDown();
+                highlightCountId = 0;
+                highlightMenuBuffer = null;
+                highlightTrId = 0;
+                highlightTv = null;
+                for(int i = 0; i < memoTb.getChildCount(); i++){
+                    memoTb.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                }
+
 
                 newTr[trIndex].setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -347,6 +355,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 highlightTv = findViewById(highlightCountId);
                 int count = Integer.valueOf(highlightTv.getText().toString());
                 count += 1;
+                counterMap.replace(highlightMenuBuffer,count);
                 highlightTv.setText(String.valueOf(count));
             }
         } else if (v == subtractionBtn) {
@@ -372,6 +381,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 } else {
                     highlightTv.setText(String.valueOf(count));
+                    counterMap.replace(highlightMenuBuffer,count);
                 }
             }
 

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Material.Dialog"></activity>
         <activity android:name=".TableActivity" />
 
         <meta-data

@@ -146,9 +146,9 @@
                     android:id="@+id/saveBtn_editMenu"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:background="@color/colorPrimaryDark"
                     android:text="@string/save"
-                    android:layout_margin="5dp"
                     android:textColor="@color/white"
                     android:textSize="16sp"></Button>
 
@@ -157,18 +157,18 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/white"
                     android:text="@string/delete"
+                    android:textColor="@color/white"
                     android:textSize="16sp"></Button>
 
                 <Button
                     android:id="@+id/clearBtn_editMenu"
                     android:layout_width="100dp"
-                    android:layout_margin="5dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/white"
                     android:text="@string/clear"
+                    android:textColor="@color/white"
                     android:textSize="16sp"></Button>
 
             </LinearLayout>
@@ -219,7 +219,7 @@
                         android:id="@+id/refresh_editMenu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                      android:background="@drawable/button_background"
+                        android:background="@drawable/button_background"
                         android:src="@drawable/ic_refresh_black_24dp" />
 
                 </LinearLayout>

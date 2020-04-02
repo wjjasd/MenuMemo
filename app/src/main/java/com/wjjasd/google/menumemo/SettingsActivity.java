@@ -56,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             MainActivity.adapter_spinner = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, list);
             MainActivity.spinner.setAdapter(MainActivity.adapter_spinner);
         }
-        Intent intent = new Intent(SettingsActivity.this,MainActivity.class);
+        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 

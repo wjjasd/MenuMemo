@@ -84,7 +84,7 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EditMenuActivity.this,SettingsActivity.class);
+        Intent intent = new Intent(EditMenuActivity.this, SettingsActivity.class);
         startActivity(intent);
         finish();
     }

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
     private int cursorLength;
     private int mCount;
-    private TableRow newTr[] = new TableRow[200];
+    private TableRow[] newTr = new TableRow[200];
     private int trIndex = -1;
     private int mtrCount;
     private int tableRowPosition;
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (menuArray != null && menuArray.length != 0) {
             buttonsTb.removeAllViews();
             int arrayLength = menuArray.length;
-            final Button menuBtn[] = new Button[arrayLength];
+            final Button[] menuBtn = new Button[arrayLength];
             for (int i = 0; i < arrayLength; i++) {
                 menuBtn[i] = new Button(this);
                 menuBtn[i].setId(i);
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 highlightMenuBuffer = null;
                 highlightTrId = 0;
                 highlightTv = null;
-                for(int i = 0; i < memoTb.getChildCount(); i++){
+                for (int i = 0; i < memoTb.getChildCount(); i++) {
                     memoTb.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
 
@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 highlightTv = findViewById(highlightCountId);
                 int count = Integer.valueOf(highlightTv.getText().toString());
                 count += 1;
-                counterMap.replace(highlightMenuBuffer,count);
+                counterMap.replace(highlightMenuBuffer, count);
                 highlightTv.setText(String.valueOf(count));
             }
         } else if (v == subtractionBtn) {
@@ -381,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 } else {
                     highlightTv.setText(String.valueOf(count));
-                    counterMap.replace(highlightMenuBuffer,count);
+                    counterMap.replace(highlightMenuBuffer, count);
                 }
             }
 

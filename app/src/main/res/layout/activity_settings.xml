@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,17 +12,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_weight="0.1"
         android:background="@color/colorPrimary"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        android:layout_weight="0.1"
         android:weightSum="10">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:background="@color/colorPrimary"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
+            android:background="@color/colorPrimary"
             android:gravity="left">
 
             <ImageButton
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
                 android:textAllCaps="true"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,8 +71,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_weight="9.9"
+        android:gravity="center"
         android:orientation="vertical">
 
         <Button

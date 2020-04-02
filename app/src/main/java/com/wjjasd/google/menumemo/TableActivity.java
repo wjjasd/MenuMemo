@@ -88,11 +88,11 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 Object obj = v.getTag();
-                if(obj != null){
-                    int position = (int)obj;
-                    MemoData memoData = ((MemoAdapter)mAdapter).getMemo(position);
-                    Intent intent = new Intent(TableActivity.this,DetailActivity.class);
-                    intent.putExtra("memoData", (Serializable) memoData);
+                if (obj != null) {
+                    int position = (int) obj;
+                    MemoData memoData = ((MemoAdapter) mAdapter).getMemo(position);
+                    Intent intent = new Intent(TableActivity.this, DetailActivity.class);
+                    intent.putExtra("memoData", memoData);
                     startActivityForResult(intent, REQUEST_CODE_DETAIL);
                 }
 
@@ -134,7 +134,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_CODE_DETAIL&&resultCode==RESULT_OK){
+        if (requestCode == REQUEST_CODE_DETAIL && resultCode == RESULT_OK) {
             makeCard();
         }
     }

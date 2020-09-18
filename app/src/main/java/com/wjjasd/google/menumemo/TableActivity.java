@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,7 +120,6 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         }
-
     }
 
     @Override

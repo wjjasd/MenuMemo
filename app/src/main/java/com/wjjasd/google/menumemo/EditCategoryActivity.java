@@ -10,12 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//메뉴 편집 화면에서 메뉴 롱클릭시 팝업
 public class EditCategoryActivity extends Activity implements View.OnClickListener {
 
-    Button saveBtn, cancelBtn, deleteBtn;
-    String category;
-    EditText categoryEdt;
-    Intent intent;
+    private Button saveBtn, cancelBtn, deleteBtn;
+    private String mCategory;
+    private EditText categoryEdt;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,9 @@ public class EditCategoryActivity extends Activity implements View.OnClickListen
         deleteBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
 
-        category = intent.getExtras().getString("category");
-        categoryEdt.setText(category);
+        //롱클릭시 넣은 카테고리 받기
+        mCategory = intent.getExtras().getString("category");
+        categoryEdt.setText(mCategory);
 
     }
 
@@ -51,7 +53,7 @@ public class EditCategoryActivity extends Activity implements View.OnClickListen
             SQLiteDatabase db = MemoDBHelper.getInstance(this).getWritableDatabase();
             String temp = categoryEdt.getText().toString();
             try {
-                db.execSQL("update menu set category = ? where category = ?", new String[]{temp, category});
+                db.execSQL("update menu set category = ? where category = ?", new String[]{temp, mCategory});
                 setResult(RESULT_OK);
                 finish();
             } catch (Exception e) {

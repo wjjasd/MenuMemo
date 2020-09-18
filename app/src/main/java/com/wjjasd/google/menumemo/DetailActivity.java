@@ -9,14 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import javax.xml.transform.Result;
-
 import io.realm.Realm;
 
+//테이블 메모 저장 후 카드 클릭시 상세 화면
 public class DetailActivity extends Activity implements View.OnClickListener {
 
-    private String mTableNo;
-    private String mMenu;
+    private String mTableNo;    //매장내 테이블 번호
+    private String mMenu;       //메뉴
     private TextView tv_tableNo;
     private EditText et_menu;
     private Button saveBtn;
@@ -43,6 +42,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         mRealm = Realm.getDefaultInstance();
 
         Intent intent = getIntent();
+        //홈 화면에서 넘어온 메모VO
         MemoData memoData = (MemoData) intent.getExtras().getSerializable("memoData");
 
         mTableNo = memoData.getTableNo();
@@ -57,6 +57,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        //저장
         if (v == saveBtn) {
             mTableNo = tv_tableNo.getText().toString();
             mMenu = et_menu.getText().toString();
@@ -69,6 +70,8 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                     finish();
                 }
             });
+
+        //삭제
         } else if (v == deleteBtn) {
             mRealm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -79,6 +82,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                     finish();
                 }
             });
+         //취소
         } else if (v == cancelBtn) {
             finish();
         }

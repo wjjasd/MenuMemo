@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -32,11 +30,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.realm.Realm;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HashMap<String, Boolean> firstCheckerMap = new HashMap<String, Boolean>();
     private HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
     private int cursorLength;
-    private int mCount;
     private TableRow[] newTr = new TableRow[200];
     private int trIndex = -1;
     private int mtrCount;
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView highlightTv = null;
     private int highlightTrId = 0;
     private String highlightMenuBuffer = null;
-    private AdView mAdView;
     private String[] intentMenu;
     private int[] intentCount;
     private boolean dataCheck;
@@ -80,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContent();
 
         MobileAds.initialize(this, getString(R.string.admob_app_id));
-        mAdView = findViewById(R.id.adView_main);
+        AdView adView = findViewById(R.id.adView_main);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        adView.loadAd(adRequest);
         mRealm = Realm.getDefaultInstance();
 
     }
@@ -215,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             final TextView menuTv = new TextView(this);
             final TextView countTv = new TextView(this);
 
+            int count;
             if (firstCheckerMap.get(mMenu) == true) {
 
                 trIndex += 1;
@@ -226,11 +223,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 menuTv.setTextColor(Color.parseColor("#802D2D"));
                 menuTv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                mCount = counterMap.get(mMenu) + 1;
+                count = counterMap.get(mMenu) + 1;
 
-                counterMap.replace(mMenu, mCount);
+                counterMap.replace(mMenu, count);
 
-                String st = String.valueOf(mCount);
+                String st = String.valueOf(count);
                 countTv.setText(st);
                 int id = getCountId(mMenu);
                 countTv.setId(id);
@@ -295,12 +292,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int id = getCountId(mMenu);
                 TextView tv = findViewById(id);
 
-                mCount = counterMap.get(mMenu) + 1;
-                counterMap.replace(mMenu, mCount);
+                count = counterMap.get(mMenu) + 1;
+                counterMap.replace(mMenu, count);
 
                 //mCount = Integer.parseInt(tv.getText().toString());
                 //mCount += 1;
-                tv.setText(Integer.toString(mCount));
+                tv.setText(Integer.toString(count));
             }
 
 
@@ -477,7 +474,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int intentMenuLength = 0;
         for (int i = 0; i < menuArray.length; i++) {
-            if (firstCheckerMap.get(menuArray[i]) == false) {
+            if (!firstCheckerMap.get(menuArray[i])) {
                 intentMenuLength += 1;
             }
         }
@@ -486,7 +483,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int j = 0;
         for (int i = 0; i < menuArray.length; i++) {
-            if (firstCheckerMap.get(menuArray[i]) == false) {
+            if (!firstCheckerMap.get(menuArray[i])) {
                 intentMenu[j] = menuArray[i];
                 intentCount[j] = counterMap.get(menuArray[i]);
                 j += 1;

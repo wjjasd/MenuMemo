@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String mMenu = null;
     private TableLayout memoTb;
     private ScrollView scrollView;
-    private HashMap<String, Boolean> firstCheckerMap = new HashMap<String, Boolean>();
-    private HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
+    private final HashMap<String, Boolean> firstCheckerMap = new HashMap<String, Boolean>();
+    private final HashMap<String, Integer> counterMap = new HashMap<String, Integer>();
     private int cursorLength;
-    private TableRow[] newTr = new TableRow[200];
+    private final TableRow[] newTr = new TableRow[200];
     private int trIndex = -1;
     private int mtrCount;
     private int tableRowPosition;
@@ -169,18 +169,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setButtons() {
-
+            //메뉴들이 들어가있는 ArrayList가 비어있지 않으면
         if (menuArray != null && menuArray.length != 0) {
-            buttonsTb.removeAllViews();
+            buttonsTb.removeAllViews(); //테이블에서 뷰들을 모두 지운뒤 버튼 생성
             int arrayLength = menuArray.length;
             final Button[] menuBtn = new Button[arrayLength];
             for (int i = 0; i < arrayLength; i++) {
                 menuBtn[i] = new Button(this);
-                menuBtn[i].setId(i);
+                menuBtn[i].setId(i);    //클릭 이벤트를 위해 아이디 부여
                 menuBtn[i].setText(menuArray[i]);
                 menuBtn[i].setAllCaps(false);
 
-                buttonsTb.addView(menuBtn[i]);
+                buttonsTb.addView(menuBtn[i]);  //버튼 테이블에 추가
                 menuBtn[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -188,8 +188,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         TextView tv = (TextView) v;
                         mMenu = tv.getText().toString();
                         setMemoTb();
+                        //버튼이 처음 눌린 뒤 두번째 부터는 수량을 올려주기 위한 작업
                         firstCheckerMap.replace(mMenu, false);
-                        mMenu = null;
+                        mMenu = null; //멤버변수 초기화
                     }
                 });
             }

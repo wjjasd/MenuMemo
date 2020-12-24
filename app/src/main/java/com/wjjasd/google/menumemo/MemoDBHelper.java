@@ -10,10 +10,10 @@ public class MemoDBHelper extends SQLiteOpenHelper {
 
     private static MemoDBHelper sInstance;
     private static final int DB_VERSION = 3;
-    private static final String DB_NAME = "Memo.db";
-    private static final String TABLE_NAME = "menu";
-    private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_CATEGORY = "category";
+    private static final String DB_NAME = "Memo.db";            //DB명
+    private static final String TABLE_NAME = "menu";            //테이블명
+    private static final String COLUMN_NAME = "name";           //column index 0
+    private static final String COLUMN_CATEGORY = "category";   //column index 1
 
     public MemoDBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);

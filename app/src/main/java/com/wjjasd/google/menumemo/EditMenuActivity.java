@@ -212,6 +212,7 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
         } else if (v == saveBtn) {
             menu_userInput = menuEdt.getText().toString();
             category_userInput = categoryEdt.getText().toString();
+            //널체크
             if (menu_userInput.getBytes().length <= 0 || category_userInput.getBytes().length <= 0) {
                 Toast.makeText(this, R.string.emptyMsg, Toast.LENGTH_SHORT).show();
             } else {
@@ -219,11 +220,12 @@ public class EditMenuActivity extends AppCompatActivity implements View.OnClickL
                 values.put("name", menu_userInput);
                 values.put("category", category_userInput);
 
+                // DB 쓰기
                 SQLiteDatabase db = MemoDBHelper.getInstance(this).getWritableDatabase();
                 long rowId = db.insert("menu", null, values);
-                if (rowId == -1) {
+                if (rowId == -1) {  //insert 실행결과 : 실패
                     Toast.makeText(this, R.string.failed_toast, Toast.LENGTH_SHORT).show();
-                } else {
+                } else {            //insert 실행결과 : 성공
                     Toast.makeText(this, R.string.saved_toast, Toast.LENGTH_SHORT).show();
                     setList();
                 }
